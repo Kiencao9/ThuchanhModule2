@@ -20,15 +20,6 @@ public class Main {
             System.out.println(" 7. Đọc File CSV");
             System.out.println(" 0. Quay lại");
             System.out.println("Nhập lựa chọn");
-            try {
-                choice = scanner.nextInt();
-                while (choice < 0 || choice > 8) {
-                    System.err.println("Chỉ nhập số từ 0 đến 7");
-                    choice = scanner.nextInt();
-                }
-            } catch (Exception e) {
-                System.err.println("Chỉ được nhập số");
-            }
             choice = scanner.nextInt();
             switch (choice) {
                 case 1:

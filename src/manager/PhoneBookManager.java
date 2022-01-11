@@ -2,15 +2,24 @@ package manager;
 
 
 import model.PhoneBook;
+import validate.Validate;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class PhoneBookManager {
-    public static final String PATH_PHONE = "src/file/phonebook.txt";
-    private  final ArrayList<PhoneBook> phoneBooks = new ArrayList<>();
+    public static final String PATH_PHONE = "src/file/phonebook.csv";
+    private  final ArrayList<PhoneBook> phoneBooks;
     public final Scanner scanner = new Scanner(System.in);
+
+    public PhoneBookManager() {
+        if (new File(PATH_PHONE).length() == 0) {
+            this.phoneBooks = new ArrayList<>();
+        } else {
+            this.phoneBooks = readFile(PATH_PHONE);
+        }
+    }
 
     public void displayAll() {
         for (PhoneBook phoneBook  : phoneBooks) {
@@ -49,6 +58,7 @@ public class PhoneBookManager {
         int gender = scanner.nextInt();
         System.out.println("Nhập địa chỉ");
         String address = scanner.nextLine();
+        scanner.nextLine();
         System.out.println("Nhập ngày sinh");
         String birth = scanner.nextLine();
         System.out.println("Nhập email");
@@ -67,8 +77,7 @@ public class PhoneBookManager {
             }
         }
         if (editPhoneBook != null) {
-            System.out.println("Nhập số điện thoại mới");
-            String phoneNumber = scanner.nextLine();
+            String phoneNumber = Validate.validatePhoneNumber();
             editPhoneBook.setPhoneNumber(phoneNumber);
             System.out.println("Nhâp nhóm mới");
             String group = scanner.nextLine();
@@ -88,8 +97,7 @@ public class PhoneBookManager {
             System.out.println("Nhập ngày sinh");
             String birth =scanner.nextLine();
             editPhoneBook.setBirth(birth);
-            System.out.println("Nhập email");
-            String email = scanner.nextLine();
+            String email = Validate.validateEmail();
             editPhoneBook.setEmail(email);
             writeToFile(PATH_PHONE);
         }
@@ -103,8 +111,16 @@ public class PhoneBookManager {
             }
         }
         if (phoneBook != null) {
-            phoneBooks.remove(phoneBook);
-            System.out.println("Xóa Thành Công");
+            System.out.println("Bạn chắc chắn muốn xóa");
+            System.out.println("Nhập Y để xóa");
+            System.out.println("Nhập bất kì để thoát");
+            String deleteY = scanner.nextLine();
+            if (deleteY.equals("Y")) {
+                phoneBooks.remove(phoneBook);
+                writeToFile(PATH_PHONE);
+                System.out.println("Xóa Thành Công");
+            }
+
         } else {
             System.out.println("Không tìm thấy số điện thoại này");
         }
@@ -127,11 +143,10 @@ public class PhoneBookManager {
             } else {
                 BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(path));
                 for (PhoneBook phoneBook : phoneBooks) {
-                    bufferedWriter.write(phoneBook.getPhoneNumber() + "," + phoneBook.getGroup() + "," + phoneBook.getName() + "," + phoneBook.getGender() + "," + phoneBook.getAddress()  + "\n");
+                    bufferedWriter.write(phoneBook.getPhoneNumber() + "," + phoneBook.getGroup() + "," + phoneBook.getName() + "," + phoneBook.getGender() + "," + phoneBook.getAddress()  + "," + phoneBook.getBirth() + "," + phoneBook.getEmail()  + "\n");
                 }
                 bufferedWriter.flush();
                 bufferedWriter.close();
-                System.out.println("Đã ghi file");
             }
 
         } catch (Exception e) {

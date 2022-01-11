@@ -11,7 +11,7 @@ public class Validate {
         String phone;
         String regex = "^(0|\\+84)(\\s|\\.)?(\\d{9,11}+)$";
         while (true) {
-            System.out.println("Input PhoneNumber");
+            System.out.println("Nhập số điện thoại");
             try {
                 phone = scanner.nextLine();
                 if (phone.matches(regex)) {
@@ -30,7 +30,7 @@ public class Validate {
         String email;
         String regex = "^[A-Za-z]+[A-Za-z0-9]*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)$";
         while (true) {
-            System.out.println("Input Email");
+            System.out.println("Nhập email");
             try {
                 email = scanner.nextLine();
                 if (email.matches(regex)) {

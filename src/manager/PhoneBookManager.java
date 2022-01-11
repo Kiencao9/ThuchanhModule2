@@ -69,7 +69,9 @@ public class PhoneBookManager {
         System.out.println("Thêm thành công");
     }
 
-    public void editPhone(String phone) {
+    public void editPhone() {
+        System.out.println("Nhập SĐT muốn sửa");
+        String phone = scanner.nextLine();
         PhoneBook editPhoneBook = null;
         for (PhoneBook phonebook : phoneBooks) {
             if (phonebook.getPhoneNumber().equals(phone)) {
@@ -103,7 +105,9 @@ public class PhoneBookManager {
         }
     }
 
-    public void deletePhone(String phone) {
+    public void deletePhone() {
+        System.out.println("Nhập SĐT muốn xóa");
+        String phone =scanner.nextLine();
         PhoneBook phoneBook = null;
         for (PhoneBook p : phoneBooks) {
             if (p.getPhoneNumber().equals(phone)) {
@@ -126,9 +130,11 @@ public class PhoneBookManager {
         }
     }
 
-    public void searchPhone(String phone) {
+    public void searchPhone() {
+        System.out.println("Nhập SĐT muốn tìm");
+        String phone = scanner.nextLine();
         for (PhoneBook p : phoneBooks) {
-            if (p.getPhoneNumber().equals(phoneBooks)) {
+            if (p.getPhoneNumber().equals(phone)) {
                 System.out.println(p);
             }
         }

@@ -29,19 +29,14 @@ public class Main {
                     phoneBookManager.addPhone();
                     break;
                 case 3:
-                    System.out.println("Nhập số điện thoại muốn sửa");
-                    String phoneNumber1 = scanner.nextLine();
-                    phoneBookManager.editPhone(phoneNumber1);
+                    phoneBookManager.editPhone();
                     break;
                 case 4:
-                    System.out.println("Nhập số điện thoại muốn xóa");
-                    String phoneNumber2 = scanner.nextLine();
-                    phoneBookManager.deletePhone(phoneNumber2);
+                    phoneBookManager.deletePhone();
                     break;
                 case 5:
-                    System.out.println("Nhập số điện thoại muốn tìm");
-                    String phoneNumber3 = scanner.nextLine();
-                    phoneBookManager.searchPhone(phoneNumber3);
+
+                    phoneBookManager.searchPhone();
                     break;
                 case 6:
                     phoneBookManager.writeToFile(PhoneBookManager.PATH_PHONE);
